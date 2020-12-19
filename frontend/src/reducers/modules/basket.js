@@ -7,18 +7,18 @@ import {
 
 const initState = {
   items: [],
-  isOpenModal: false
+  isOpenModal: true
 };
 
 const basket = (state = initState, action) => {
   switch (action.type) {
     case ADD_PRODUCT_TO_CART:
-      let existedItem = state.items.find(i => i.product_id === action.payload.productId)
+      let existedItem = state.items.find(i => i.product_id === action.payload.product_id)
       if(existedItem)
         return {
           ...state,
           items: state.items.map(i => {
-            if (i.product_id === action.payload.productId) {
+            if (i.product_id === action.payload.product_id) {
               i.waranty += 1
             }
             return i
@@ -38,7 +38,8 @@ const basket = (state = initState, action) => {
       }
     case REMOVE_PRODUCT_FROM_CART:
       return {
-        ...state
+        ...state,
+        items: state.items.filter(i => i.product_id !== action.payload)
       }
     case UPDATE_BASKET_MODAL_STATE:
       return {

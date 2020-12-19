@@ -1,10 +1,11 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import {Route} from "react-router-dom";
 import connect from "react-redux/es/connect/connect";
 import Dashboard from "./components/dashboard";
 import Basket from "./components/basket";
+import Layout from "./hoc/layout";
 import {withRouter} from "react-router-dom";
-import Header from "./components/layout/header";
+import Header from "./components/header";
 
 class App extends React.Component {
   constructor(props) {
@@ -12,7 +13,8 @@ class App extends React.Component {
     this.state = {
       sideBarMenuClose: false,
       routes: [
-        {name: 'Dashboard', exact: true, path: '/', component: Dashboard},
+        {name: 'Dashboard', exact: true, path: '/', component: Layout(Dashboard)},
+        {name: 'Basket', exact: true, path: '/basket', component: Layout(Basket)}
       ]
     };
   }
@@ -31,11 +33,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <Fragment>
         <Header/>
         {this.getRoutes()}
-        <Basket/>
-      </div>
+      </Fragment>
     );
   }
 }
