@@ -10,7 +10,7 @@ import {
 export const fetchCurrentBasket = () => {
   return dispatch => {
     return axios
-      .get('http://192.168.254.128:8000/basket')
+      .get('http://0.0.0.0:8000/basket')
       .then(res => {
           dispatch(updateBasketItems(res.data))
       })
@@ -23,7 +23,7 @@ export const fetchCurrentBasket = () => {
 export const addProductToCart = product => {
   return (dispatch, state) => {
     return axios
-      .post('http://192.168.254.128:8000/basket', {owner_id: state().user.id, product_id: product.id})
+      .post('http://0.0.0.0:8000/basket', {owner_id: state().user.id, product_id: product.id})
       .then(res => {
         dispatch(addProductItemToCart(product.id, state().user.id))
         toast.success('Successful add new bike to your basket')
@@ -37,7 +37,7 @@ export const addProductToCart = product => {
 export const removeProduct = productId => {
   return (dispatch, state) => {
     return axios
-      .delete('http://192.168.254.128:8000/basket', {
+      .delete('http://0.0.0.0:8000/basket', {
         params: {owner_id: state().user.id, product_id: productId}
       })
       .then(res => {

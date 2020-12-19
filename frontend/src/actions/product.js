@@ -5,7 +5,7 @@ import {UPDATE_PRODUCT_ITEMS} from "../constants/product";
 export function fetchProductList() {
   return dispatch => {
     axios
-      .get('http://192.168.254.128:8000/product')
+      .get('http://0.0.0.0:8000/product')
       .then(res => {
         dispatch(updateProductList(res.data))
       })
